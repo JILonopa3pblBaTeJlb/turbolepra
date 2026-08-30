@@ -1,0 +1,1809 @@
+/* Base Styles
+**************************************************/
+html, body {
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+body {
+	font:100% verdana, sans-serif;
+	co lor:#000;
+	background:#fff url(http://img.dirty.ru/lepro/bg_top.jpg) repeat-x 0 0;
+}
+img {
+	border:none;
+}
+a {
+	color: #333300;
+}
+a:visited {
+	color: #996;
+}
+a:hover {
+	color: #699 !important;
+}
+table {
+	border-collapse:collapse;
+	font-size:1em;
+}
+
+
+hr {
+	border:none;
+	background:#ccc;
+	height:1px;
+	text-align:left;
+	margin-bottom:2em;
+}
+
+h1 {
+	color:#ADADAD;
+	font:1.4em arial;
+	padding-left:5px;
+}
+h2 {
+	color:#326ccd;
+	font:1.4em arial;
+	margin-bottom:1em;
+}
+
+p {
+	margin:0 0 1em 0;
+	padding:0;
+}
+ul, li {
+	margin:0;
+	padding:0;
+}
+form {
+	margin:0;
+	padding:0;
+}
+input, textarea, select {
+	font:1em verdana, sans-serif;
+	background:#f6efd2;
+	border:1px solid #e9e9e9;
+	border-top-color:#ccc;
+}
+
+input.radio, input.image, input.checkbox {
+	background:none;
+	border:none;
+	vertical-align:middle;
+}
+
+select {
+	font-size:0.85em;
+	height:1.6em;
+	vertical-align:middle;
+}
+
+label {
+	color:#666;
+	line-height:180%;
+	font-weight:bold;
+}
+
+
+
+
+
+/* Global structure
+**************************************************/
+/* Layout */
+#main {
+	min-height:100%;
+	width:100%;
+	min-width:800px;
+	margin-bottom:-140px;
+	font-size:0.8em;
+	position:relative;
+}
+#main_inner {
+	padding-bottom:160px;
+}
+#cellar {
+	height:140px;
+	min-width:800px;
+	clear:both;
+	font-size:0.8em;
+	background:url(http://img.dirty.ru/lepro/bg_cellar.gif) no-repeat 50% 100%;
+	position:relative;
+}
+
+
+.layout_left {
+	position:absolute;
+	width:200px;
+	top:0;
+	left:0;
+}
+.layout_right {
+	margin-left:245px;
+}
+
+#main .layout_left {
+	background:url(http://img.dirty.ru/lepro/bg_left.jpg) no-repeat 0 0;
+}
+#cellar .layout_right {
+	height:100%;
+}
+.three_columns {
+	width:100%;
+}
+.three_columns td {
+	vertical-align:top;
+}
+
+.two_columns {
+	width:100%;
+}
+.two_columns td {
+	vertical-align:top;
+}
+.two_columns .one {
+	width:69%;
+}
+.two_columns .two {
+	width:31%;
+}
+
+/* Left Column */
+#logo {
+	width:166px;
+	height:47px;
+	position:absolute;
+	top:21px;
+	left:7px;
+	background:url(http://img.dirty.ru/lepro/lepro_logo.png) no-repeat 0 0;
+}
+
+#gertruda {
+	margin-top:195px;
+	height:320px;
+	position:relative;
+}
+#menu {
+	position:absolute;
+	z-index:999;
+	top:95px;
+	left:0;
+	font-size:1px;
+}
+#menu img,
+#menu a {
+	position:absolute;
+	left:0;
+	display:block;
+	width:194px;
+	height:44px;
+
+}
+#menu #about {
+	top:0;
+}
+#menu #about img {
+	background:url(http://img.dirty.ru/lepro/menu/about.png) no-repeat 0 0;
+}
+#menu #constitution {
+	top:44px;
+}
+#menu #constitution img {
+	background:url(http://img.dirty.ru/lepro/menu/constitution.png) no-repeat 0 0;
+}
+#menu #depositary {
+	top:88px;
+}
+#menu #depositary img {
+	background:url(http://img.dirty.ru/lepro/menu/depositary.png) no-repeat 0 0;
+}
+
+#president {
+	padding:10px 0 0 60px;
+	margin-right:10px;
+	background:url(http://img.dirty.ru/lepro/president.gif) no-repeat 10px 0;
+	min-height:49px;
+	color:#4b4b4b;
+	border-bottom:1px solid #e9e9e9;
+}
+#president p {
+	font-size:0.8em;
+	margin-top:0.5em;
+}
+#parlament {
+	padding:10px 0 10px 60px;
+	margin-right:10px;
+}
+#president a,
+#parlament a {
+	color:#3d3d3d;
+	font-size:1.2em;
+}
+#president a {
+	font-size:1.4em;
+}
+
+#elections {
+	padding:10px 0 0 60px;
+	margin-right:10px;
+	border-top:1px solid #e9e9e9;
+	font-size:1.2em;
+}
+#elections a {
+	background:#f00;
+	color:#fff !important;
+	padding:2px 3px;
+}
+
+
+/* Header */
+#header {
+	width:100%;
+	margin-bottom:20px;
+}
+#header .columns_wrapper {
+	padding:10px 10px 20px 0;
+	margin:10px 10px 10px 0;
+}
+#header .three .columns_wrapper {
+	margin-bottom:0;
+	padding-bottom:0;
+}
+#header .one .columns_wrapper {
+	padding-left:5px;
+}
+#header .one {
+	padding-top:15px;
+	width:26%;
+}
+#header .two {
+	padding-top:15px;
+	width:43%;
+}
+
+#header .three {
+	padding-top:30px;
+	width:31%;
+}
+#header a {
+	color:#000;
+}
+
+
+
+
+
+#greetings {
+	font-size:0.85em;
+	line-height:160%;
+	border-right:1px solid #e9e9e9;
+	position:relative;
+}
+#greetings #logout {
+	padding-top:3px;
+	margin:0;
+}
+#greetings #logout a {
+	background:url(http://img.dirty.ru/lepro/steps.gif) no-repeat 0 0.7em;
+	padding:5px 0 6px 12px;
+	margin-left:-12px;
+	color:#9b9b9b !important;
+}
+#greetings #logout a {
+	display:inline-block;
+	margin-top:-5px;
+	position:relative;
+}
+#greetings #logout a:hover {
+	color: #699 !important;
+}
+
+
+
+
+#private ul {
+	float:left;
+	position:relative;
+}
+#private ul li {
+	color:#cecece;
+	float:left;
+	padding-bottom:5px;
+}
+#private ul li a {
+	color:#3d3d3d !important;
+	text-decoration:none;
+	position:relative;
+	padding:0 3px;
+}
+#private ul li span {
+	padding:0 3px 1px 3px;
+}
+#private ul li span em {
+	font-style:normal;
+	border:1px solid #3d3d3d;
+	border-color:#fff #fff #3d3d3d #fff;
+	border-width:0 1px 1px 1px;
+}
+#private ul li a:hover span {
+	background:#3d3d3d; color:#fff;
+}
+#private ul li a:hover span em {
+	border:none; margin:0 1px 1px 1px;
+}
+
+
+#private li#things {
+	ma rgin-left:-9px;
+}
+#private li#things a {
+	pa dding:3px 3px 4px 6px;
+	ba ckground:url(http://img.dirty.ru/lepro/arrow_blue.gif) no-repeat 0 0.75em;
+	position:relative;
+}
+#private li#inbox a {
+	padding:6px 0 6px 26px;
+	background:url(http://img.dirty.ru/lepro/inbox.gif) no-repeat 8px 0.8em;
+}
+
+#private p {
+	clear:both;
+	font-size:0.85em;
+	padding-top:0.7em;
+	margin:0 0 0 5px;
+}
+
+
+#search input.text {
+	width:80%;
+	margin-right:5px;
+	padding:1px 2px;
+	font-size:1em;
+	background:#fff !important;
+}
+#search p {
+	font-size:0.85em;
+	margin:0;
+}
+#search form {
+	white-space:nowrap;
+}
+
+
+
+
+
+/* Navigation */
+#navigation  {
+	width:100%;
+	ma rgin:20px 0 0 0;
+}
+#navigation td {
+	padding-top:20px;
+}
+.default #navigation {
+	wi dth:100%;
+}
+#navigation .two {
+	padding-bottom:0.3em;
+}
+
+
+#navigation #title {
+	width:100%;
+	padding-bottom:5px;
+	overflow:hidden;
+}
+#navigation #title img {
+	padding-left:5px;
+}
+#navigation  #filter {
+	ma rgin-top:-0.1em;
+	po sition:relative;
+	le ft:-5px;
+	ma rgin-top:20px; 
+	background:#e9e9e9;
+}
+#navigation  #filter .inner {
+	padding:10px;
+}
+#navigation #filter form {
+	white-space:nowrap;
+}
+#navigation #filter select {
+	margin-left:3px;
+	background:#fff;
+}
+#navigation #filter img {
+	position:relative;
+	top:3px;
+}
+
+
+
+
+
+
+/* Content */
+#content {
+	width:100%;
+	padding-top:20px;
+	position:relative;
+}
+
+.default #content,
+.my #content {
+	wi dth:100%;
+}
+.comments #content,
+.votes #content {
+	border-top:1px solid #ccc;
+	background:url(http://img.dirty.ru/lepro/bg_top.jpg) repeat-x 0 -15px;
+}
+#content_left {
+	width:100%;
+	min-height:480px; /* написать для IE! */
+	float:none;
+	padding-bottom:1em;
+	
+}
+.two_column #content_left {
+	fl oat:left;
+	wi dth:99%;
+	_margin-right:-100%;
+}
+#content_left_inner {
+	width:90%;
+	ma x-width:700px; /* для красоты неописуемой! */
+}
+.my #content_left_inner {
+	width:100%;
+}
+#content_right {
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:888;
+	width:0;
+}
+#content_right_inner {
+	ma rgin-left:99%;
+	pa dding-top:20px;
+	background:#fff;
+}
+
+
+
+
+/* Posts */
+.new_only .post {
+	display:none;
+}
+
+.new_only .new,
+.new_only .show,
+.new_only #inbox_posts .post{
+	display:block;
+}
+.dt {
+	padding-bottom:0.5em; 
+	position:relative;
+}
+.new .dt {
+	padding:5px 5px 0.5em 5px;
+}
+.new .dd .p {
+	padding:0 5px 5px 5px;
+}
+
+.highlight1 .new .dt,
+.highlight1 .new .dd .p {
+	background:#f7f7f7;
+}
+.highlight2 .new .dt,
+.highlight2 .new .dd .p {
+	background:#f6efd2;
+}
+.highlight3 .new .dt,
+.highlight3 .new .dd .p {
+	background:#fdd2f3;
+}
+.highlight4 .new .dt,
+.highlight4 .new .dd .p {
+	border:1px solid #f00;
+}
+.highlight4 .new .dt {
+	border-width:1px 1px 0 1px;
+}
+.highlight4 .new .dd .p {
+	border-width:0 1px 1px 1px;
+}
+
+.dt img.fb {
+	position:absolute;
+	left:-30px; top:0;
+}
+.dt p {
+	margin:0; padding:5px 0;
+}
+.dt p, .dt a { /* для ресайза */
+	po sition:relative;
+}
+.dt p img, .dt a img{ /* для ресайза */
+	po sition:absolute;
+	vi sibility:hidden;
+}
+
+
+.post {
+	margin-left:5px;
+	padding-bottom:4em;
+}
+#navigation .post {
+	padding-bottom:20px;
+}
+.dd {
+	font-size:0.8em;
+	line-height:140%;
+	color:#666; 
+	position:relative;
+	width:100%;
+}
+.comments #content .post,
+#inbox_comments .post {
+	padding-bottom:3em;
+}
+.dd a,
+.dd a:visited {
+	color:#666;
+	white-space:nowrap;
+}
+.dd a.login {
+	padding:4px 5px;
+	background:url('http://img.dirty.ru/lepro/post-icon.gif') no-repeat 50% 50%;
+	font-size:0.7em;
+	vertical-align:middle;
+	text-decoration:none;
+	_height:1px;
+}
+.dd a.show_parent {
+	text-decoration:none;
+	font-size:1.2em; 
+}
+.new .dd a.login {
+	background:url('http://img.dirty.ru/lepro/post-icon-new.gif') no-repeat 50% 50%;
+}
+.new .dd a.show_parent {
+	di splay:none;
+}
+.new_only .new .dd a.show_parent {
+	di splay:inline;
+}
+.dd a img { /* aka class="user" */
+	margin-top:-16px;
+	position:relative;
+	top:4px;
+	border-right:5px solid #fff;
+}
+.dd .p {
+	margin:0;
+	padding:0 180px 5px 0;
+}
+.my .tree .p {
+	padding-right:0;
+}
+.comments #content .dd .p {
+	padding:0 0 5px 0;
+}
+.dd .show_link {
+	display:none;
+}
+.dd a.u {
+	text-decoration:none;
+	padding:1px 3px 5px 3px;
+	position:relative;
+	bottom:-2px;
+}
+.dd a.u:hover {
+	padding: 0 2px 4px 2px; 
+	border:1px solid #ccc;
+}
+.golden span.stars {
+	padding:10px 28px;
+	font-size:0.7em;
+	background:url(http://img.dirty.ru/lepro/stars.gif) no-repeat 50% 50%;
+}
+.wasstars {
+	padding:10px 28px;
+	font-size:0.7em;
+	background:url(http://img.dirty.ru/lepro/wasstars.gif) no-repeat 50% 50%;
+}
+.golden span.stars,
+.wasstars {margin-top:-5px;} /* for IE6- */
+
+#navigation .dt, #navigation .dd {
+	width:90%;
+}
+#content_right .dt, #content_right .dd {
+	margin-left:0;
+}
+
+.comments #content .shrinked .dt {
+	display:none;
+}
+.comments #content .shrinked .dd .reply_link {
+	display:none;
+}
+.comments #content .shrinked .dd .show_link,
+.comments #content .was_shrinked .dd .show_link {
+	display:inline;
+}
+
+/* Comments */
+
+.comments .tree, .my .tree {margin-left:224px;}
+.comments .indent_0, .my .indent_0 {margin-left:5px;}
+.comments .indent_1, .my .indent_1 {margin-left:28px;}
+.comments .indent_2, .my .indent_2 {margin-left:56px;}
+.comments .indent_3, .my .indent_3 {margin-left:84px;}
+.comments .indent_4, .my .indent_4 {margin-left:112px;}
+.comments .indent_5, .my .indent_5 {margin-left:140px;}
+.comments .indent_6, .my .indent_6 {margin-left:168px;}
+.comments .indent_7, .my .indent_7 {margin-left:196px;}
+.comments .indent_8, .my .indent_8 {margin-left:224px;}
+
+
+
+
+
+
+
+/* Bottom */
+
+table.footer{
+	width: 100%;
+}
+table.footer img {
+	behavior: url('/js/png.htc');
+}
+table.footer a{
+	color: #555555;
+}
+table.footer .left{
+	background: url(http://img.dirty.ru/lepro/lepoback1.jpg) repeat-x top right;
+	height: 162px;
+	width: 66%;
+	padding: 0px 5px 0px 180px;
+	white-space: nowrap;
+	font-size: 17px;
+	vertical-align: top;
+}
+table.footer .left img{
+	vertical-align: top;
+}
+table.footer .left a#back{
+	font-weight: 200;
+	margin-left: 18px;
+	position: relative;
+	top: 23px;
+}
+table.footer .right{
+	background: url(http://img.dirty.ru/lepro/lepoback2.jpg) repeat-x top left;
+	padding: 24px 10px 0px 42px;
+	font-size: 12px;
+	line-height: 1.6em;
+	white-space: nowrap;
+	vertical-align: top;
+	width: 34%;
+}
+table.footer .right p{
+	font-size: 11px;
+}
+table.footer .right div{
+	text-align: right;
+	margin-top: -30px;
+}
+
+#futurico {
+	position:absolute;
+	bottom:10px; right:20px;
+}
+#futurico a {
+	display:block;
+	position:relative;
+	cursor:pointer;
+	cursor:hand;
+	width:48px;
+	height:36px;
+}
+#futurico a img {
+	width:48px;
+	height:36px;
+	background:url(http://img.dirty.ru/lepro/logo-grey.gif) no-repeat 0 0;
+}
+#futurico a:hover img {
+	background:url(http://img.dirty.ru/lepro/logo-blue.gif) no-repeat 0 0;
+}
+
+
+
+
+
+
+/* Sorting Categories (Tabs Butttons)
+**************************************************/
+.category {
+	margin:-12px 0 20px 5px;
+	position:relative;
+	font-size:0.85em;
+}
+.my .category {
+	margin-top:0; 
+}
+.category td {
+	padding:0 5px 0.5em 0;
+	white-space:nowrap;
+}
+.my .category td {
+	padding-right:20px; 
+}
+.category label {
+	font-weight:normal;
+	vertical-align:middle;
+}
+.category a,
+.category em {
+	display:block;
+	padding:3px 5px 3px 5px;
+	color:#000 !important;
+}
+.category em {
+	font-style:normal;
+	background:#e9e9e9;
+}
+.category select {
+	font-size:100%;
+}
+.category span {
+	color:#666;
+	position:relative;
+	top:3px;
+}
+
+.category .system span {
+	top:0;
+	display:block;
+	padding:3px 0;
+}
+
+.category .system a {
+	display:inline;
+	text-decoration:none;
+	padding:0;
+	border-bottom:1px dotted #000; 
+}
+.new_only #show_new, #show_all {
+	display:none;
+}
+.new_only #show_all {
+	display:block;
+}
+
+#content_right .category {
+	margin:10px 0 20px 0;
+}
+#content_right .category span {
+	display:block;
+	padding:2px 5px;
+	color:#000;
+	position:relative;
+	cursor:pointer;
+	cursor:hand;
+}
+#content_right .category span.selected {
+	background:#e9e9e9;
+	cursor:default;
+}
+
+#content_right .category span em {
+	padding:0;
+	background:none;
+	border:1px dotted #000;
+	border-color:#fff #fff #000 #fff;
+}
+#content_right .category span.selected em {
+	border-color:#e9e9e9;
+}
+
+
+
+
+
+
+
+/* Voting
+**************************************************/
+/* Voting buttons (posts) */
+.my #inbox_posts .vote,
+.my #inbox_comments .vote {
+	display:none;
+}
+.my #inbox_posts {
+	position:relative;
+}
+.my #inbox_posts .ib {
+	position:relative;
+	left:-26px;
+	margin-bottom:-28px;
+}
+.dd .vote {
+	position:absolute;
+	z-index:1;
+	right:32px;
+	top:-10px;
+	margin-top:1em;
+	padding-bottom:10px;
+	width:60px;
+	background:#fff;
+}
+
+.dd .vote div {
+	float:right;
+	width:50px;
+	margin-bottom:0.2em;
+	position:relative;
+		
+}
+
+.dd .vote div a {
+	display:block;
+	float:right;
+	margin-right:5px;
+	width:18px;
+	height:18px;
+	cursor:pointer;
+	cursor:hand;
+	text-decoration:none;
+	color:#cecece !important;
+	background:url(http://img.dirty.ru/lepro/vote_button.gif) no-repeat 0 0;
+}
+
+.dd .vote div a:hover,
+.dd .vote div a.voted {
+	color:#666 !important;
+	background-image:url(http://img.dirty.ru/lepro/vote_button_hover.gif);
+}
+.dd .vote div a.voted {
+	cursor:default !important;
+}
+.dd .vote div em {
+	display:block;
+	top:50%;
+	margin-top:-0.6em;
+	text-align:center;
+	font-style:normal;
+	font-weight:normal;
+	position:relative;
+	line-height:120%;
+}
+.dd .vote div span {
+	position:absolute;
+	right:-30px;
+	top:0;
+	width:32px;
+	height:21px;
+	overflow:hidden;
+	text-align:center;
+	color:#9c9c9c;
+	background:url(http://img.dirty.ru/lepro/gray.gif) no-repeat 50% 50%;
+	margin:0;
+	height:18px;
+	cursor:default;
+}
+#navigation .dd .vote div span {
+	fo nt-size:1em;
+}
+.pop .dd .vote div span,
+.golden .dd .vote div span {
+	background:url(http://img.dirty.ru/lepro/gold.gif) no-repeat 50% 50%;
+}
+
+.ord .dd .vote div span {
+	background:url(http://img.dirty.ru/lepro/trans.gif) no-repeat 50% 50%;
+}
+.inuse .vote div span {
+	ba ckground:url(http://img.dirty.ru/lepro/raiting.gif) no-repeat 50% 50%;
+}
+.loading .dd .vote div span {
+	background:url(http://img.dirty.ru/lepro/loading.gif) no-repeat 50% 50%;
+}
+/*
+.dd .vote div span em {
+	display:block;
+	position:static;
+	padding:2px 0;
+	margin:0;
+	font-size:1.2em;
+	line-height:120%;
+}
+*/
+
+.inuse,
+.hilight {
+	position:relative; z-index:100;
+	ba ckground:url(http://img.dirty.ru/lepro/bg_top.jpg) repeat-x 0 -10px;
+}
+
+
+/* Voting buttons (comments) */
+.comments #content .dd .vote {
+	top:-36px;
+	left:-35px;
+	width:32px;
+	height:56px; 
+}
+
+.comments #content .dd .vote div {
+	position:absolute;
+	top:3px;
+	margin:0;
+	width:24px;
+}
+
+.comments #content .dd .vote div a {
+	position:absolute;
+	right:0;
+	margin:0; 
+	display:none;
+
+}
+.comments #content .inuse .vote div a {
+	display:block;
+}
+.comments #content .shrinked .vote div a {
+	display:none;
+}
+.comments #content .dd .vote div a.plus {
+	top:0;
+}
+.comments #content .dd .vote div a.minus {
+	bottom:-60px;
+	cursor:pointer;
+	cursor:hand;
+}
+
+.comments #content .dd .vote div span {
+	position:absolute;
+	right:-8px;
+	top:22px;
+	width:32px;
+	margin:0;
+	height:16px;
+	cursor:default;
+	font-size:1em;
+}
+.comments #content .dd .vote div span {
+	background:none;
+}
+.comments #content .inuse .vote div span,
+.comments #content .mine .vote div span {
+	background:#efefef; 
+}
+.comments #content .shrinked .vote div span {
+	background:none;
+}
+.comments #content .loading .vote div span {
+	background:url(http://img.dirty.ru/lepro/loading.gif) no-repeat 50% 50%; 
+}
+
+.comments #content .dd .vote div span em {
+	padding:2px;
+}
+.comments #content .dd .vote div span em {
+	position:relative;
+	top:50%;
+	margin-top:-0.8em; 
+	line-height:110%; 
+	font-weight:normal; 
+	font-size:1em; 
+}
+
+.comments #content .dd .vote div a.minus em {
+	position:relative;
+	margin-top:-0.6em;
+	background:none;
+}
+
+
+
+
+
+/* Voting Block */
+#vote_choice {display:none;}
+#vote_choice {
+	list-style:none;
+	position:absolute;
+	z-index:100;
+	top:46px;
+	left:14px;
+	background:#fff;
+	border:1px solid #e9e9e9;
+	margin:0;
+}
+#vote_choice li {
+	border:none;
+	padding:0;
+	white-space:nowrap;
+}
+#vote_choice a {
+	display:block;
+	padding:2px 3px;
+	text-decoration:none;
+	position:relative;
+	cursor:pointer;
+	cursor:hand;
+	color:#666;
+}
+#vote_choice a:hover {
+	background:#eaeaea;
+}
+#vote_choice a.voted,
+#vote_choice a.voted:hover{
+	color:#000 !important;
+	background:#fff;
+	cursor:default;
+}
+
+
+
+
+
+/* Common Classes
+**************************************************/
+.ads {
+	clear:both;
+	border-top:1px solid #e9e9e9;
+	width:99%;
+}
+.bottom {
+	margin:0.5em 0 2em 0;
+}
+
+.my .ads {
+	border:none; /* temporary */
+}
+.ads_inner {
+	padding:20px 0;
+	border-bottom:1px solid #e9e9e9;
+}
+.clear {
+	clear:both;
+	height:0;
+	font-size:0;
+	overflow:hidden;
+}
+.nobr {
+	white-space:nowrap;
+}
+ul.menu {
+	list-style:none;
+}
+a.user {
+	white-space:nowrap;
+}
+a.user img {
+	margin-top:-16px;
+	position:relative;
+	top:4px;
+	border-right:5px solid #fff;
+}
+a.blue {
+	color:#3d3d3d !important;
+}
+a.blue:hover {
+	color: #699 !important;
+}
+input.text {
+	color:#666;
+}
+input.changed {
+	color:#000;
+}
+.small {
+	font-size: 0.85em;
+	color: #666666;	
+	line-height: 13px;
+}
+
+
+
+
+
+/* Resizing of images
+**************************************************/
+.restrict_box {
+	display:block;
+	position:relative;
+	max-width:600px;
+}
+.img_box {
+	display:block;
+	position:relative;
+}
+.restrict_box img,
+.img_box img {
+	visibility:visible !important;
+	position:static !important;
+	display:block;
+	width:100%;
+	height:auto;
+}
+.zoomed img {
+	position:absolute !important;
+	z-index:100;
+	width:auto;
+}
+	
+
+
+
+/* Tags and Categories (right column)
+**************************************************/
+/* Tags */
+#tags {
+	position:relative;
+	clear:both;
+	ma rgin:5px;
+}
+.cloud {
+	clear:both;
+	position:relative;
+	top:-0.5em;
+	font-size: 1em;
+	fo nt-weight:bold;
+	fo nt-family: 'trebuchet ms', sans-serif;
+	color: #000;
+	pa dding-bottom:10px;
+	width:100%;
+	overflow:hidden;
+	background:#fff;
+
+}
+#cloud_inner {
+	margin:5px;
+}
+.cloud a {
+	text-decoration:none;
+	color: #666;
+	line-height:220%;
+}
+.cloud a:visited {
+	color: #666;
+}
+.cloud a:hover {
+	background:#eaeaea;
+}
+
+.cloud .s1 {
+	font-size:0.75em;
+}
+.cloud .s2 {
+	font-size:0.85em;
+	line-height:220%;
+	color:#555 !important;
+}
+.cloud .s3 {
+	font-size:0.9em;
+	line-height:200%;
+	color:#444 !important;
+}
+.cloud .s4 {
+	font-size:1.1em;
+	line-height:180%;
+	color:#333 !important;
+}
+.cloud .s5 {
+	font-size:1.3em;
+	line-height:160%;
+	color:#333 !important;
+}
+.cloud .s6 {
+	font-size:1.5em;
+	line-height:140%;
+	color:#222 !important;
+}
+.cloud .s7 {
+	font-size:1.8em;
+	line-height:120%;
+	color:#222 !important;
+}
+.cloud .s8 {
+	font-size:2em;
+	line-height:100%;
+	color:#222 !important;
+}
+
+
+#tag_tab {
+	display:none;
+	width:15px;
+	height:130px;
+	cursor:pointer;
+	position:absolute;
+	top:-5px;
+	left:-15px;
+	le ft:-25px;
+	le ft:-17px;
+	background-color:#efefef;
+	background-position:50% 50%;
+	background-repeat:no-repeat;
+}
+#tag_tab {
+	background-image:url(http://img.dirty.ru/lepro/tags_hide.gif);
+}
+.tags_shrinked #tag_tab {
+	background-image:url(http://img.dirty.ru/lepro/tags_show.gif);
+}
+
+
+
+
+/* Tags Adding
+**************************************************/
+#tags_add {
+	margin:0 20px 20px 0;
+}
+
+#tags_add input.text {
+	width:80%;
+	padding:1px 2px;
+	min-width:9.5em;
+	font-size:0.75em;
+	vertical-align:middle;
+	position:relative;
+	le ft:-3px;
+}
+
+#tags_add #tags_new {
+	white-space:nowrap;
+	margin-bottom:5px;
+	position:relative;
+}
+
+#tags_add #tags_new a#metki_wiki {
+	position:absolute;
+	background:#ff6c24;
+	font-size:0.85em;
+	text-align:center;
+	color:#fff !important;
+	width:1em;
+	height:1.1em;
+	overflow:hidden;
+	left:-1em;
+	top:0.2em;
+	margin:0 0 0 -10px;
+}
+
+#tags_add #tags_new a {
+	font:bold 1.3em tahoma;
+	text-decoration:none;
+	position:relative;
+	padding:2px 3px;
+	vertical-align:middle;
+	color:#996;
+}
+
+#tags_add #tags_common {
+	margin-bottom:2em;
+}
+
+#tags_add #tags_common span {
+	font-size:0.75em;
+	color:#666;
+}
+
+#tags_add #tags_common a {
+	color:#666;
+	margin-right:5px;
+}
+
+#tags_add #tags_private {
+	margin:0 0 20px 0;
+}
+
+#tags_add #tags_private a {
+	color:#666;
+}
+
+#tags_add #tags_private span {
+	font-size:0.75em;
+	margin-right:3px;
+	color:#666;
+	white-space:nowrap;
+}
+
+#tags_add #tags_private a.del {
+	font-size:1em;
+	font-family:verdana;
+	padding:1px;
+	text-decoration:none;
+}
+
+#tags_add #tags_private a.del:hover {
+	color:#666 !important;
+	background:transparent;
+}
+
+#tags_add #tags_private a.del em {
+	font-style:normal;
+}
+
+#tags_add #tags_private a.del:hover em{
+	color:#f00 !important;
+}
+
+
+
+
+
+/* Reply Form (comments)
+**************************************************/
+.header {
+	font-size:0.75em; 
+	color:#666;
+	border-bottom:1px solid #fff;
+}
+.header .header_right {
+	float:right;
+}
+.header .header_left {
+	float:left;
+}
+.header a,
+.header a:visited {color:#666;}
+.body {clear:both;}
+
+.bottom {
+	font-size:0.85em;
+}
+.bottom .bottom_right {
+	float:right;
+}
+.bottom  .bottom_left {
+	float:left;
+}
+
+
+#reply_form {
+	width:90% !important;
+	min-width:280px;
+	margin-bottom:1em;
+	margin-left:5px; 
+	overflow:hidden;
+	position:relative;
+}
+
+#reply_form .header { 
+	padding-bottom:3px; 
+}
+
+#reply_form .header a,
+#wysiwyg_tools a {
+	color:#777;
+	text-decoration:none;
+}
+
+#reply_form .body {
+	margin-bottom:5px; 
+}
+
+#reply_form .bottom span {
+	border-bottom:1px solid #000;
+	cursor:pointer;
+	cursor:hand;
+	line-height:140%;
+	color:#000 !important;
+}
+#reply_form .bottom_left {
+	float:none;
+}
+#reply_form .bottom_left input {
+	height:1.7em;
+	width:60%;
+}
+#reply_form form {
+	width:90%;
+}
+#reply_form textarea {
+	width:100%;
+	height:200px;
+	background:#f3f0df;
+	border:1px solid #e9e9e9; 
+	border-top-color:#ccc;
+	overflow:auto;
+}
+
+
+.dd #reply_form .header {
+	font-size:1em; 
+}
+.dd #reply_form .bottom {
+	font-size:1.1em;
+}
+.dd #reply_form {
+	margin-bottom:-1em; 
+	margin-left:28px; 
+	margin-top:2em;
+}
+.dd #reply_form textarea {
+	font-size:1.3em;
+}
+
+#reply_form #reply_form_pic_hide p {margin-top:8px;}
+
+#reply_link_default {
+	margin-left:5px; 
+}
+#reply_link_default a {
+	font-size:1.4em; 
+	text-decoration:none;
+	color:#000;
+	border-bottom:1px dotted #000; 
+}
+
+
+
+
+
+
+/* Post
+**************************************************/
+#new_post {padding:0 0 20px 5px;}
+#new_post textarea {
+	height:200px;
+	background:#f3f0df;
+	border:1px solid #e9e9e9;
+	border-top-color:#ccc;
+	width:100%;
+	overflow:auto;
+	pa dding:2px;
+}
+
+#new_post #post_body,
+#new_post #post_tags {
+	margin-bottom:2em; 
+}
+#new_post #post_tags textarea {
+	height:70px;
+}
+
+#new_post .header_left img {
+	margin-right:10px; 
+}
+
+#new_post .header_right {
+	padding-bottom:0.5em; 
+}
+#new_post #post_preview_btn {
+	position:relative;
+	font-size:0.85em;
+	margin-bottom:40px;
+	color:#666;
+}
+#new_post #post_preview_btn p {
+	margin-top:10px;
+}
+#new_post #post_preview_btn img {
+	position:absolute;
+	left:-100px;
+	top:3px;
+}
+
+#new_post #post_preview {
+	margin:4em -5px;
+	padding:10px 5px;
+	border:1px solid #e9e9e9;
+	border-width:1px 0;
+}
+
+
+/* Category Selector (Post options)
+**************************************************/
+#category_selector {
+	font-size:0.85em; 
+	margin-bottom:1em; 
+	position:relative;
+	left:-3px;
+	float:left;
+	height:18em;
+	min-height:180px;
+}
+#category_selector,
+#category_selector ul {
+	list-style:none;
+}
+#category_selector li {
+	margin-bottom:0.5em; 
+	white-space:nowrap;
+	clear:both;
+	float:left;
+}
+#category_selector li ul {
+	position:absolute;
+	top:0.5em; left:15em;
+	font-size:0.9em;
+	display:none;
+}
+#category_selector li li {
+	margin:0 0 0.5em 0;
+}
+#category_selector input {
+	width:15px;
+	height:15px;
+	vertical-align:middle;
+	margin-right:3px; 
+}
+#category_selector label {
+	cursor:pointer;
+	cursor:hand;
+}
+#category_selector a {
+	color:#000;
+	text-decoration:none;
+	display:block;
+	padding:3px;
+}
+#category_selector li.selected a{
+	background:#e9e9e9;
+	cursor:text;
+	color:#000 !important;
+}
+
+#category_selector em {
+	font-style:normal;
+	border-bottom:1px dashed #000; 
+}
+#category_selector li.selected em {
+	border:none;
+}
+#category_selector li.selected ul {
+	display:block;
+}
+
+
+/* User page
+**************************************************/
+#user {width:100%;}
+#user td {vertical-align:top; padding-right:40px;}
+
+#uservote {fl oat:left; wi dth:210px; he ight:300px; position:absolute; top:0; left:0; text-align:right; ma rgin-bottom:20px;}
+#uservote #userpic {width:200px; height:300px; background:#eee; position:absolute; top:0; left:-1px;}
+
+
+#userdata {float:left;}
+#userdata div {margin-bottom:2em;}
+
+#usernick {margin:2em 0 1em 0; position:relative;}
+
+#usernick h2 {margin:0; font-size:1em;}
+#usernick h2 a {color:#326dd5; font-size:1.6em;}
+#usernick h2 span {color:#666; font-size:0.85em;}
+
+ul#userweb {list-style:none; margin-bottom:2em;}
+
+#invites {clear:both; margin-bottom:2em;}
+
+#userawards {border:1px solid #e9e9e9; padding:20px; text-align:center; margin-bottom:2em;}
+
+#userwords {
+	clear:both;
+	border-bottom:1px solid #e9e9e9;
+	padding-bottom:2em;
+	margin-bottom:2em;
+}
+
+#userstat {color:#666;}
+#userstat div {padding-bottom:2em; color:#666;}
+
+#uservote .vote {
+	position:absolute;
+	z-index:1;
+	left:-69px;
+	top:-21px;
+	width:60px;
+}
+
+#uservote .vote div {
+	po sition:relative;
+}
+
+#uservote .vote div strong {
+	position:absolute;
+	top:0;
+}
+#uservote .vote div strong.vote1{
+	right:0;
+}
+#uservote .vote div strong.vote2{
+	right:24px;
+}
+#uservote .vote div a {
+	position:absolute;
+	width:18px;
+	height:18px;
+	cursor:pointer;
+	cursor:hand;
+	text-decoration:none;
+	color:#cecece !important;
+	background:url(http://img.dirty.ru/lepro/vote_button.gif) no-repeat 0 0;
+	font-size:0.75em; 
+}
+#uservote .vote div a.plus{
+	top:0;
+	right:0;
+}
+#uservote .vote div a.minus{
+	top:46px;
+	right:0;
+}
+#uservote .vote div a:hover,
+#uservote .vote div a.voted {
+	color:#666 !important;
+	background-image:url(http://img.dirty.ru/lepro/vote_button_hover.gif);
+}
+#uservote .vote div a.voted {
+	cursor:default !important;
+}
+#uservote .vote div em {
+	display:block;
+	top:50%;
+	margin-top:-0.6em;
+	text-align:center;
+	font-style:normal;
+	font-weight:normal;
+	position:relative;
+	line-height:120%;
+}
+#uservote .vote div span {
+	position:absolute;
+	right:0;
+	top:19px;
+	height:28px;
+	width:42px;
+	overflow:hidden;
+	text-align:center;
+	color:#9c9c9c;
+	font-size:0.85em;
+	background:url(http://img.dirty.ru/lepro/gray.gif) no-repeat 50% 50%;
+}
+
+#uservote .inuse .vote div span {
+	background:url(http://img.dirty.ru/lepro/raiting.gif) no-repeat 50% 50%;
+}
+#uservote .loading .vote div span {
+	background:url(http://img.dirty.ru/lepro/loading.gif) no-repeat 50% 50%;
+}
+#uservote .vote div span em {
+	font-size:1.2em;
+}
+
+#uservote .inuse,
+#uservote .hilight {
+	position:relative;
+	z-index:100;
+}
+
+
+/* Registration
+**************************************************/
+input.big {font-size:3em; width:100%; padding:3px 0;}
+input.middle {font-size:2em; width:100%; padding:2px 0;}
+
+select {fo nt-family:arial;}
+.field {margin-bottom:2em; max-width:800px; width:100%;}
+
+
+.description {color:#666; font-size:0.85em; padding-left:15px; margin-top:10px; background:url(http://img.dirty.ru/lepro/bullet.gif) no-repeat -20px 0;}
+
+
+
+#total_pages {
+	position:relative;
+	left:-130px;
+	top:-62px;
+	width:100px;
+	padding:10px 10px;
+	background:#efeef3;
+	text-align:right;
+	color:#666;
+}
+
+#total_pages strong {
+	font-size:1.4em;
+	font-weight:normal;
+}
+#total_pages span {
+	font-size:0.75em;
+}
+
+/* Распредление голосов */
+#votes_stat {
+	margin-bottom:2em;
+	margin-left:-10px;
+}
+#votes_stat td {
+	padding:40px 40px 5px 15px;
+	vertical-align:top;
+}
+#votes_stat #votes_minus {
+	background:url(http://img.dirty.ru/lepro/minus.gif) no-repeat 20px 0;
+}
+#votes_stat #votes_plus {
+	border-left:1px solid #e9e9e9;
+	background:url(http://img.dirty.ru/lepro/plus.gif) no-repeat 20px 0;
+}
+#votes_stat ul {
+	list-style:none;
+}
+#votes_stat ul li {
+	margin-bottom:0.5em;
+}
+#votes_stat ul li span {
+	color:#666;
+	font-size:0.85em;
+}
+
+
+/* настройка подсветки новых комментов */
+#comments_highlight div {
+	float:left;
+	white-space:nowrap;
+	padding:10px 5px;
+	margin-right:5px;
+}
+#comments_highlight label {
+	font-weight:normal;
+	ve rtical-align:middle;
+}
+#comments_highlight input {
+	
+}
+#comments_highlight #hl0_box {
+
+}
+#comments_highlight #hl1_box {
+	background:#f7f7f7;
+}
+#comments_highlight #hl2_box {
+	background:#f6efd2;
+}
+#comments_highlight #hl3_box {
+	background:#fdd2f3;
+}
+#comments_highlight #hl4_box {
+	border:1px solid #f00;
+	padding:9px 4px;
+}
+
+
+#gotag {
+	position:relative;
+	margin:-20px 200px 0 -5px;
+	padding:0 0 0 5px;
+}
+#gotag div {
+	padding:5px;
+	background:#fa5fa1;
+	bo rder:10px outset #FFFF00;
+}
+#gotag em {
+	font-style:normal;
+	font-size:0.85em;
+	color:#fff;
+}
+#gotag input {
+	font-size:1.5em;
+	width:100%;
+	padding:2px 0;
+}

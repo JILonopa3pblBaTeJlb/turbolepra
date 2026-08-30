@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Лепрозорий / Убежище</title>
+    <link rel="stylesheet" href="{{ROOT}}4_files/main.css" type="text/css">
+    <link rel="stylesheet" href="{{ROOT}}4_files/thing.css" type="text/css">
+    <link rel="stylesheet" href="{{ROOT}}4_files/paginator.css" type="text/css">
+</head>
+<body class="page">
+
+<div id="tma-nav-bar" style="
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 40px; 
+    background-color: #1a1a1a; 
+    color: #ffffff; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    z-index: 99999;
+    border-bottom: 1px solid #333;
+    font-family: sans-serif;
+">
+    <button onclick="history.back()" style="background: none; border: none; color: #fff; font-size: 16px; cursor: pointer;">⬅ Назад</button>
+    <button onclick="history.forward()" style="background: none; border: none; color: #fff; font-size: 16px; cursor: pointer;">Вперед ➡</button>
+    <button onclick="location.reload()" style="background: none; border: none; color: #fff; font-size: 16px; cursor: pointer;">🔄 F5</button>
+</div>
+
+<style>
+    body {
+        padding-top: 40px !important;
+    }
+</style>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        
+        tg.setHeaderColor('#1a1a1a');
+    }
+</script>
+        
+<div id="main"><div id="main_inner">
+
+<div id="navigation-thing-box"><div id="navigation-thing-box-inner">
+
+</div></div>
+    <div class="layout_left">
+
+        <div style="background-image: url('{{ROOT}}4_files/0.gif'); background-repeat: no-repeat; background-position: bottom left; width: 200px; height: 184px; position: relative;">
+            
+            <div style="padding-top: 12px; width: 100%;">
+                <a href="{{ROOT}}index.html">
+                    <img src="{{ROOT}}4_files/0.png" alt="Ух бля" title="Ух бля" id="logo" style="width: 50px; height: auto; display: block; margin-left: 50px;">
+                </a>
+            </div>
+        </div>
+
+        <div id="gertruda" style="margin: 0; padding: 0;">
+                    <a href="{{ROOT}}index.html" style="display: block; line-height: 0; font-size: 0; margin: 0; padding: 0;">
+                        <img src="{{ROOT}}4_files/40.jpg" style="display: block; margin: 0; padding: 0; border: none;">
+                    </a>
+                </div>
+        <div id="president">
+            <a href="{{ROOT}}index.html">Kaimera</a>
+            <p>Президент Грузии<br>с 13.09 по 19.09</p>
+        </div>
+
+    </div>
+    <div class="layout_right">
+
+        <table id="header" class="three_columns">
+    <tbody><tr>
+        <td class="one">
+            <div id="greetings" class="columns_wrapper">
+            
+                Паша Цветомузыка жив, <a href="{{ROOT}}index.html">Kaimera</a>!
+                <p id="logout"><a href="{{ROOT}}index.html">logout</a></p>
+                
+            </div>
+        </td>
+
+        <td class="two">
+            <div id="private" class="columns_wrapper">
+            
+                <ul class="menu">
+                    <li id="things"><a href="{{ROOT}}index.html"><span><em>Мои вещи</em></span></a>|</li>
+                    <li id="favorites"><a href="{{ROOT}}index.html"><span><em>Избранное</em></span></a>|</li>
+                    <li id="inbox"><a href="{{ROOT}}index.html">&nbsp;</a></li>
+                </ul>
+                <p>Лепрозорий <a href="{{ROOT}}index.html">ждет</a> новый пост!</p>
+                
+            </div>
+        </td>
+
+        <td class="three">
+            <div id="stat">
+                <p><nobr>Сейчас нас</nobr> <a href="{{ROOT}}index.html" class="nobr blue">{{TOTAL_USERS}}</a> человек</p>
+                <p><nobr>{{DATETIME}}</nobr></p>
+            </div>
+
+        </td>
+    </tr>
+</tbody></table>
+        <div class="ads">
+         </div>
+    </div>
+
+    <div class="layout_right">
+<table id="navigation" class="two_columns">
+    <tbody><tr>
+        <td class="one">
+            
+        </td>
+        <td class="two">
+
+            <div id="filter"><div class="inner">
+                            <form name="posts_threshold" action="#" method="post" id="posts-threshold" onsubmit="return false;">
+                            <select name="selected_threshold" id="post_status">
+                                <option value="50">EASY (50+)</option>
+                                <option value="10">MEDIUM (10+)</option>
+                                <option value="0">NORMAL (0)</option>
+                                <option value="-10">HARD (-10)</option>
+                                <option value="-50">HARDCORE (-50)</option>
+                                <option value="all" selected="selected">NIGHTMARE (Все)</option>
+                            </select>
+                            </form>
+                        </div></div>
+    
+        </td>
+    </tr>
+</tbody></table>
+<div id="content" class="two_column">
+
+    <div id="content_left"><div id="content_left_inner">
+
+        {{CONTENT}}
+
+    </div></div>
+
+    <div class="clear"></div>
+</div>
+
+    </div>
+
+    <div class="layout_right">
+
+        <div class="ads bottom">
+
+        </div>
+
+    </div>
+
+
+</div></div>
+
+<div id="cellar">
+    <table class="footer">
+    <tbody><tr>
+        <td class="left">
+            <a href="{{ROOT}}index.html"><img src="{{ROOT}}4_files/flag.png" height="82" width="55"></a>
+            
+        </td>
+        <td class="right">
+
+            <div><a href="http://futurico.ru/" class="futlogo"><img src="{{ROOT}}4_files/futurico.png" alt="futurico.ru" title="futurico.ru" height="35" width="35"></a></div>
+        </td>
+    </tr>
+    </tbody></table>
+</div>
+
+{{NAV}}
+
+</body></html>

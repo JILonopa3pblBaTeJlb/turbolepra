@@ -1,0 +1,126 @@
+/* Navigation Thing */
+img {border:none;}
+#navigation-thing-box {di splay:none;
+	position: absolute;
+	top: 0; left: 0;
+	z-index: 999;
+	width: 100%}
+#navigation-thing-box-inner {
+	position:relative;
+	margin-left:245px;
+	height:1px}
+#navigation-thing {
+	overflow: hidden;
+	position: absolute;
+	z-index: 3;
+	width: 31%; min-width:200px;
+	height: 26px;
+	right: 0;
+	top: 0;
+	font-size: 11px;
+	}
+* html #navigation-thing {
+	width:expression((document.documentElement.clientWidth || document.body.clientWidth) > 820 ? "31%" : "200px");
+}
+#navigation-ramka {
+	background: url(http://img.dirty.ru/lepro/navthing/nav-thing-ramka.png) no-repeat 0 0;
+	width: 646px;
+	height: 256px;
+	position: absolute;
+	bottom: 0;
+	}
+* html #navigation-ramka {
+	background:none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img.dirty.ru/lepro/navthing/nav-thing-ramka.png', sizingMethod='scale');}
+#navigation-fon {
+	background: url(http://img.dirty.ru/lepro/navthing/nav-thing-fon.jpg) 0 0 no-repeat;
+	width: 624px;
+	height: 256px;
+	position: absolute;
+	bottom:0;
+	left:11px;}
+#navigation-tab {
+	height: 26px;
+	width: 252px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	cursor: pointer;
+	cursor: hand;
+	}
+#navigation-thing img {
+	display: block;
+	position: absolute;
+	}
+#nav-nav {
+	left:20px; bottom:8px;
+	cursor: pointer;
+	}
+#lepra {
+	left:32px;
+	top:11px;
+}
+#party {
+	left:243px;
+	top:49px;
+}
+#letopis {
+	left:63px;
+	top:98px;
+}
+#quotes {
+	left:63px;
+	top:154px;
+}
+#shop {
+	left:378px;
+	top:98px;
+}
+#stats {
+	left:378px;
+	top:154px;
+}
+
+
+/* Navigation Thing Classic */
+#navigation-thing-classic-box {display:none;
+	position:absolute;
+	top:0; left:0;
+	z-index:999;
+	width:99%;
+}
+#navigation-thing-classic-box-inner {
+	margin-left:220px;
+	position:relative;
+}
+
+#navigation-thing-classic-outer {
+	width:99%;
+	position:relative;
+}
+
+#navigation-thing-classic {
+	position:absolute;
+	right:0; top:10px;
+	width:30%;
+	min-width:230px;
+}
+#navigation-thing-classic select {
+	width:230px;
+	margin-left:-3px;
+	color: #000000;
+	background: #ffffff;
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+}
+* html #navigation-thing-classic-box-inner {height:1px;}
+* html #navigation-thing-classic .minwidth {
+	padding-left:230px;
+	height:1px;
+}
+* html #navigation-thing-classic .minwidth .minwidth_inner {height:1px;}
+* html #navigation-thing-classic .minwidth .minwidth_inner select {
+	margin-left:-233px;
+	position:relative;
+	height:1px;
+}
