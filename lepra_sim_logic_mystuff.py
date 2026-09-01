@@ -6,9 +6,7 @@ from update_karma import update_karma
 from lepra_affinity import get_affinity
 from lepra_loader import load_post_by_id
 from lepra_role_manager import get_role_behavior
-from lepra_tg_tool import get_valid_image_data, render_media_html # Добавили render_media_html
-
-
+from lepra_tg_tool import get_valid_image_data, render_media_html
 
 def process_mystuff(u, ap, ram_posts_dict, now):
     if ap <= 0: return ap
@@ -68,7 +66,12 @@ def process_mystuff(u, ap, ram_posts_dict, now):
         rupee_mod = 0.1 if u.special_role == "rupee" else 1.0
         
         if u.can_comment() and len(p.comments) < MAX_COMMENTS and random.random() < (u.reactivity * 0.0025 * reactivity_mult * rupee_mod):
-            if u.empathy < 0.4:
+            
+            # --- СТРОГОЕ ПРАВИЛО ДЛЯ АНЕКДОТОВ В MYSTUFF ---
+            if getattr(p, 'post_type', '') == "анекдоты" and hasattr(GlobalState, 'anekdot_builder'):
+                c_text = GlobalState.anekdot_builder.build_anekdot_comment()
+            # ---------------------------------------------
+            elif u.empathy < 0.4:
                 c_text = get_arkhipizdrit_comment(p.comments, u.id)
             else:
                 # Если предыдущий коммент — это картинка, отвечаем картинкой
@@ -87,4 +90,3 @@ def process_mystuff(u, ap, ram_posts_dict, now):
             
             ap -= 5
     return ap
-            

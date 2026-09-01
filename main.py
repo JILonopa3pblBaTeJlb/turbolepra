@@ -23,6 +23,7 @@ from lepra_tg_tool import get_valid_image_data, get_media_url, load_used_ids, sa
 from lepra_ejik_builder import EjikPostBuilder
 from lepra_pashket_builder import PashketBuilder
 from lepra_youtube_builder import YouTubePostBuilder
+from lepra_anekdot_builder import AnekdotBuilder
 
 
 def sync_tg_registry():
@@ -65,6 +66,7 @@ def main():
     GlobalState.ejik_builder = EjikPostBuilder(GlobalState.processor)
     GlobalState.pashkett_builder = PashketBuilder()
     GlobalState.youtube_builder = YouTubePostBuilder()
+    GlobalState.anekdot_builder = AnekdotBuilder()
 
     if is_verbose:
         lepra_logger.set_verbose(True)

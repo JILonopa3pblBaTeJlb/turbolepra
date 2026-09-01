@@ -79,7 +79,12 @@ def process_feed(u, ap, common_glagne, inbox_posts_cache, now):
         
         rupee_mod = 0.01 if u.special_role == "rupee" else 1.0
         if ap >= 5 and u.can_comment() and len(p.comments) < MAX_COMMENTS and random.random() < (u.reactivity * 0.004 * (5.0 if is_leg else 1.0) * rupee_mod):
-            if u.special_role == "пашкет" and random.random() < 0.3:
+            
+            # --- СТРОГОЕ ПРАВИЛО ДЛЯ АНЕКДОТОВ ---
+            if getattr(p, 'post_type', '') == "анекдоты" and hasattr(GlobalState, 'anekdot_builder'):
+                c_text = GlobalState.anekdot_builder.build_anekdot_comment()
+            # ------------------------------------
+            elif u.special_role == "пашкет" and random.random() < 0.3:
                 c_text = GlobalState.pashkett_builder.get_pashket_comment()
             elif u.empathy < 0.4:
                 c_text = get_arkhipizdrit_comment(p.comments, u.id)
@@ -90,7 +95,7 @@ def process_feed(u, ap, common_glagne, inbox_posts_cache, now):
                     _, media_url = get_valid_image_data()
                     c_text = render_media_html(media_url) if media_url else "держи мем"
                 else:
-                    random_words = GlobalState.processor.get_random_sample(count=random.randint(5, 10)) # Уменьшим количество слов, чтобы не ломать логику
+                    random_words = GlobalState.processor.get_random_sample(count=random.randint(5, 10))
                     
                     # Улучшенный промпт
                     user_prompt = (

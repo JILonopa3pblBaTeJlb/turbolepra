@@ -1,19 +1,21 @@
 # --- START OF FILE lepra_content_factory.py ---
+
 import json
 import os
 import random
 import requests
 from bs4 import BeautifulSoup
 from pathlib import Path
-from typing import Optional, Set
+from typing import Optional, Set, Dict, Any
 from lepra_shared import GlobalState
 from lepra_logger import log_d
+from lepra_movie_digger import get_random_movie
 
-STORIES_HISTORY_FILE = "used_stories.json"
+STORIES_HISTORY_FILE = Path("used_stories.json")
 
 def load_used_stories() -> Set[str]:
     """Загружает историю сигнатур уже рассказанных историй."""
-    if os.path.exists(STORIES_HISTORY_FILE):
+    if STORIES_HISTORY_FILE.exists():
         try:
             with open(STORIES_HISTORY_FILE, "r", encoding="utf-8") as f:
                 return set(json.load(f))
@@ -22,7 +24,7 @@ def load_used_stories() -> Set[str]:
             return set()
     return set()
 
-def save_used_stories(stories: Set[str]):
+def save_used_stories(stories: Set[str]) -> None:
     """Сохраняет историю сигнатур в файл (ограничиваем последними 1000 записями)."""
     try:
         history_list = list(stories)[-1000:]
@@ -31,9 +33,25 @@ def save_used_stories(stories: Set[str]):
     except Exception as e:
         log_d(f"STORIES HISTORY ERROR: Ошибка сохранения истории: {e}")
 
-def get_system_prompt():
+def get_system_prompt() -> str:
     """Читает системный промпт."""
-    return Path("generic_post_prompt.txt").read_text(encoding="utf-8") if Path("generic_post_prompt.txt").exists() else "Ты — лепроюзер. Пиши неформально."
+    prompt_path = Path("generic_post_prompt.txt")
+    return prompt_path.read_text(encoding="utf-8") if prompt_path.exists() else "Ты — лепроюзер. Пиши неформально."
+
+def get_random_game() -> str:
+    """Загружает список игр из games.txt построчно или возвращает дефолт при отсутствии файла."""
+    games_path = Path("games.txt")
+    if games_path.exists():
+        try:
+            games = [line.strip() for line in games_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            if games:
+                return random.choice(games)
+        except Exception as e:
+            log_d(f"GAMES TXT ERROR: Ошибка чтения games.txt: {e}")
+            
+    # Дефолтный пул на случай, если файла еще нет
+    fallback_games = ["Ведьмак 3", "Cyberpunk 2077", "Dota 2", "Fallout", "DOOM"]
+    return random.choice(fallback_games)
 
 def fetch_anekdot_story() -> Optional[str]:
     """
@@ -107,52 +125,95 @@ def fetch_anekdot_story() -> Optional[str]:
         
     return None
 
-def generate_post_content(u, p_type) -> dict:
-    """
-    Фабрика контента с поддержкой парсинга реальных анекдотов/историй 
-    и рерайта через LLM с внедрением слов из vocab.json.
-    """
-    sys_prompt = get_system_prompt()
-    
-    if p_type == "мем":
-        return {"text": "", "is_media_required": True}
-        
-    random_words = GlobalState.processor.get_random_sample(count=random.randint(3, 7))
-    keyword_str = ", ".join(random_words)
-    
-    topic = "жизнь"
-    if u.interests:
-        topic = random.choice(list(u.interests))
-        
-    if p_type == "охуительная история":
+def generate_post_content(u: Any, p_type: str) -> Dict[str, Any]:
+  """Фабрика контента с поддержкой парсинга реальных анекдотов/историй,
+
+  выгрузки игр из games.txt, фильмов из TMDb / movies.txt и рерайта через LLM
+  с внедрением слов из vocab.json.
+  """
+  sys_prompt = get_system_prompt()
+
+  if p_type == "мем":
+    return {"text": "", "is_media_required": True, "target_title": None}
+
+  random_words = GlobalState.processor.get_random_sample(
+      count=random.randint(3, 7)
+  )
+  keyword_str = ", ".join(random_words)
+
+  topic = "жизнь"
+  if u.interests:
+    topic = random.choice(list(u.interests))
+
+  target_title = None
+
+  # Обработка игр и кино с выделением конкретного тайтла для поисковика картинок
+  if p_type == "видеоигры":
+    target_title = get_random_game()
+    user_prompt = (
+        f"Напиши пост про видеоигру {target_title}. Используй эти слова:"
+        f" {keyword_str}."
+    )
+  elif p_type in ["кино", "фильмы"] or topic in ["кино", "фильмы"]:
+    target_title = get_random_movie()
+    user_prompt = (
+        f"Напиши ироничный или развернутый пост-рецензию о кинофильме"
+        f" '{target_title}'. Используй эти слова: {keyword_str}."
+    )
+  else:
+    match p_type:
+      case "охуительная история":
         raw_story = fetch_anekdot_story()
         if raw_story:
-            user_prompt = (
-                f"Перед тобой реальная жизненная история. Твоя задача — сделать её литературный рерайт "
-                f"в фирменном стиле сайта Лепрозорий (добавь цинизма, едкого юмора, колорита старой доброй Лепры, "
-                f"сделай язык сочнее и живее). "
-                f"Обязательно органично вплети в текст эти слова: {keyword_str}. "
-                f"Вот оригинальная история для переработки:\n\n{raw_story}"
-            )
+          user_prompt = (
+              "Перед тобой реальная жизненная история. Твоя задача — сделать её"
+              " литературный рерайт в фирменном стиле сайта Лепрозорий (добавь"
+              " цинизма, едкого юмора, колорита старой доброй Лепры, сделай"
+              " язык сочнее и живее). Обязательно органично вплети в текст эти"
+              f" слова: {keyword_str}. Вот оригинальная история для"
+              f" переработки:\n\n{raw_story}"
+          )
         else:
-            user_prompt = f"Расскажи короткую забавную или абсурдную жизненную историю на тему '{topic}'. Используй эти слова: {keyword_str}."
-    else:
-        user_prompt = f"Тип контента: {p_type}. Тема: {topic}. Напиши пост в стиле Лепры. Используй эти слова: {keyword_str}."
-        
-        if p_type == "видеоигры":
-            game = random.choice(["Ведьмак 3", "Cyberpunk 2077", "Dota 2", "Fallout", "DOOM"])
-            user_prompt = f"Напиши пост про видеоигру {game}. Используй эти слова: {keyword_str}."
-        elif p_type == "политота диванная":
-            user_prompt = f"Напиши ироничный пост о политике. Используй эти слова: {keyword_str}."
-        elif p_type == "политота ватная":
-            user_prompt = f"Напиши сатиричный пост на злобу дня. Используй эти слова: {keyword_str}."
+          user_prompt = (
+              "Расскажи короткую забавную или абсурдную жизненную историю на"
+              f" тему '{topic}'. Используй эти слова: {keyword_str}."
+          )
 
+      case "политота диванная":
+        user_prompt = (
+            f"Напиши ироничный пост о политике. Используй эти слова:"
+            f" {keyword_str}."
+        )
+
+      case "политота ватная":
+        user_prompt = (
+            f"Напиши сатиричный пост на злобу дня. Используй эти слова:"
+            f" {keyword_str}."
+        )
+
+      case _:
+        user_prompt = (
+            f"Тип контента: {p_type}. Тема: {topic}. Напиши пост в стиле Лепры."
+            f" Используй эти слова: {keyword_str}."
+        )
+
+  # Ретрив-цикл: делаем до 3 попыток получить непустой текст от Олламы
+  text = ""
+  for attempt in range(3):
     text = GlobalState.processor.get_gpt_response(
-        [],
-        task_type="post",
-        system_prompt=sys_prompt,
-        user_prompt=user_prompt
+        [], task_type="post", system_prompt=sys_prompt, user_prompt=user_prompt
     )
-    
-    return {"text": text, "is_media_required": False}
+    if text and text.strip():
+      break
+    log_d(
+        f"WARNING: Пустой ответ от LLM для {u.username} (попытка"
+        f" {attempt + 1}/3), повторяем..."
+    )
+
+  return {
+      "text": text,
+      "is_media_required": False,
+      "target_title": target_title,
+  }
+
 # --- END OF FILE lepra_content_factory.py ---

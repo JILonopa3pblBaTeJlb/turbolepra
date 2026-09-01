@@ -1,6 +1,7 @@
 # --- START OF FILE lepra_sim_logic_post_creation.py ---
 
 import random
+from typing import Any
 from lepra_shared import GlobalState, Post, POST_TYPES_CONFIG, POST_CHANCE_SCALING
 from lepra_logger import log_d
 from lepra_role_manager import get_role_behavior, get_post_quality
@@ -8,9 +9,11 @@ from lepra_tg_tool import get_valid_image_data
 from lepra_image_search import get_kdpv_image
 from lepra_content_factory import generate_post_content
 
-def process_post_creation(u, ap, now):
-    if ap < 10: return ap
-    if not u.can_post(): return ap
+def process_post_creation(u: Any, ap: int, now: Any) -> int:
+    if ap < 10: 
+        return ap
+    if not u.can_post(): 
+        return ap
     
     is_dq = (u.special_role == "dramqueen")
     role_cfg = get_role_behavior(u.special_role)
@@ -29,36 +32,67 @@ def process_post_creation(u, ap, now):
         can_post = (random.random() < 0.05)
     
     if can_post:
-        chance = u.creativity * creativity_mod * 0.04 * POST_CHANCE_SCALING * (6 if u.special_role == "шиз" else (10 if u.special_role in["графоманя", "пашкет"] else 1))
+        role_multiplier = 1
+        if u.special_role == "шиз":
+            role_multiplier = 6
+        elif u.special_role in ["графоманя", "пашкет"]:
+            role_multiplier = 10
+
+        chance = u.creativity * creativity_mod * 0.04 * POST_CHANCE_SCALING * role_multiplier
         
         # Если это легенда, принудительно разрешаем пост
         if is_legendary_trigger or random.random() < chance:
             
-            # Спец-ветка: Графоманя
-            if u.special_role == "графоманя" and not is_legendary_trigger:
-                post_data = GlobalState.ejik_builder.build_ejik_post()
-                p = Post(u.id, p_type=post_data["post_type"])
-                p.text = post_data["text"]
-                p.quality = post_data["quality"]
-                if "media_url" in post_data: p.media_url = post_data["media_url"]
-                GlobalState.all_posts.append(p); u.participated_posts.add(p.id); GlobalState.stats_today["posts"] += 1
-                log_d(f"\033[91mEJIK POST: {u.username} опубликовал пост (id:{p.id})\033[0m"); ap -= 10; return ap
-            
-            # Спец-ветка: Пашкет
-            elif u.special_role == "пашкет" and not is_legendary_trigger:
-                post_data = GlobalState.pashkett_builder.build_pashket_post()
-                p = Post(u.id, p_type=post_data["post_type"])
-                p.text = post_data["text"]; p.media_url = post_data["media_url"]; p.quality = post_data["quality"]
-                GlobalState.all_posts.append(p); u.participated_posts.add(p.id); GlobalState.stats_today["posts"] += 1
-                log_d(f"\033[96mPASHKET POST: {u.username} выложил видео (id:{p.id})\033[0m"); return ap
+            # Спец-ветка с использованием паттерн-матчинга Python 3.11
+            match u.special_role:
+                case "графоманя" if not is_legendary_trigger:
+                    post_data = GlobalState.ejik_builder.build_ejik_post()
+                    p = Post(u.id, p_type=post_data["post_type"])
+                    p.text = post_data["text"]
+                    p.quality = post_data["quality"]
+                    if "media_url" in post_data: 
+                        p.media_url = post_data["media_url"]
+                    
+                    if not (p.text and p.text.strip()) and not p.media_url:
+                        return ap
+                        
+                    GlobalState.all_posts.append(p)
+                    u.participated_posts.add(p.id)
+                    GlobalState.stats_today["posts"] += 1
+                    log_d(f"\033[91mEJIK POST: {u.username} опубликовал пост (id:{p.id})\033[0m")
+                    ap -= 10
+                    return ap
+                
+                case "пашкет" if not is_legendary_trigger:
+                    post_data = GlobalState.pashkett_builder.build_pashket_post()
+                    p = Post(u.id, p_type=post_data["post_type"])
+                    p.text = post_data["text"]
+                    p.media_url = post_data["media_url"]
+                    p.quality = post_data["quality"]
+                    
+                    if not (p.text and p.text.strip()) and not p.media_url:
+                        return ap
+                        
+                    GlobalState.all_posts.append(p)
+                    u.participated_posts.add(p.id)
+                    GlobalState.stats_today["posts"] += 1
+                    log_d(f"\033[96mPASHKET POST: {u.username} выложил видео (id:{p.id})\033[0m")
+                    return ap
+                
+                case _:
+                    pass
                 
             # Спец-ветка: Обычные юзеры постят YouTube-ролик (если не легенда)
-            elif hasattr(GlobalState, 'youtube_builder') and not is_legendary_trigger and random.random() < 0.15:
+            if hasattr(GlobalState, 'youtube_builder') and not is_legendary_trigger and random.random() < 0.15:
                 post_data = GlobalState.youtube_builder.build_youtube_post()
                 p = Post(u.id, p_type=post_data["post_type"])
                 p.text = post_data["text"]
                 p.media_url = post_data["media_url"]
                 p.quality = post_data["quality"]
+                
+                if not (p.text and p.text.strip()) and not p.media_url:
+                    return ap
+                    
                 GlobalState.all_posts.append(p)
                 u.participated_posts.add(p.id)
                 GlobalState.stats_today["posts"] += 1
@@ -77,6 +111,23 @@ def process_post_creation(u, ap, now):
                 available_types = [t for t, cfg in POST_TYPES_CONFIG.items() if cfg["interest"] in u.interests]
                 p_type = random.choice(available_types) if available_types else "обычный"
             
+            # Ветка для анекдотов
+            if p_type == "анекдоты" and hasattr(GlobalState, 'anekdot_builder'):
+                post_data = GlobalState.anekdot_builder.build_anekdot_post()
+                p = Post(u.id, p_type=post_data["post_type"])
+                p.text = post_data["text"]
+                p.quality = post_data["quality"]
+                
+                if not (p.text and p.text.strip()) and not p.media_url:
+                    return ap
+                    
+                GlobalState.all_posts.append(p)
+                u.participated_posts.add(p.id)
+                GlobalState.stats_today["posts"] += 1
+                log_d(f"\033[93mANEKDOT POST: {u.username} затравил анекдот (id:{p.id})\033[0m")
+                ap -= 10
+                return ap
+
             # Защита от сбоев генерации контента
             try:
                 content = generate_post_content(u, p_type)
@@ -101,24 +152,50 @@ def process_post_creation(u, ap, now):
                     p.is_drama = True
                     log_d(f"\033[91;1m!!! ЛЕГЕНДА (ДРАМА): {u.username} взорвал гнездо (id:{p.id}) !!!\033[0m")
             
-            # Мем-логика (обрабатываем отдельно, если нужно)
+# Мем-логика (обрабатываем отдельно, если нужно)
             if p_type == "мем" or content.get("is_media_required"):
-                tg_id, media_url = get_valid_image_data()
-                if tg_id:
-                    p.tg_id = tg_id; p.media_url = media_url
-                else:
-                    p.post_type = "обычный"
+              tg_id, media_url = get_valid_image_data()
+              if tg_id:
+                p.tg_id = tg_id
+                p.media_url = media_url
+              else:
+                p.post_type = "обычный"
             else:
-                p.text = content.get("text", "")
-                # КДПВ для обычных постов (легендам тоже можно подтянуть картинку для сочности)
-                if random.random() < (0.9 if is_legendary_trigger else 0.7):
-                    query = f"{p.post_type} {list(u.interests)[0] if u.interests else ''}"
-                    kdpv_url = get_kdpv_image(query)
-                    if kdpv_url: p.media_url = kdpv_url
+              p.text = content.get("text", "")
+              
+              # КДПВ для обычных постов (легендам тоже подтягиваем картинку)
+              if random.random() < (0.9 if is_legendary_trigger else 0.7):
+                target_title = content.get("target_title")
+                
+                if target_title:
+                  # Если это игра или фильм — ищем строго по названию тайтла!
+                  query = f"{p.post_type} {target_title}"
+                else:
+                  # Для обычных постов: Тип поста + Интерес + Существительные из текста
+                  query_parts = [p.post_type]
+                  if u.interests:
+                    query_parts.append(random.choice(list(u.interests)))
+                  
+                  # Вытаскиваем случайные существительные из сгенерированного текста поста
+                  if p.text:
+                    try:
+                      nouns = list(GlobalState.processor.extract_nouns(p.text))
+                      if nouns:
+                        query_parts.extend(random.sample(nouns, k=min(2, len(nouns))))
+                    except Exception:
+                      pass
+                  
+                  query = " ".join(query_parts)
+
+                kdpv_url = get_kdpv_image(query)
+                if kdpv_url: 
+                  p.media_url = kdpv_url
             
             if not is_legendary_trigger:
-                if random.random() < (0.01 * drama_chance_mod): p.is_drama = True
-                elif random.random() < u.get_shitpost_prob(): p.is_tupak = True
+                if random.random() < (0.01 * drama_chance_mod): 
+                    p.is_drama = True
+                elif random.random() < u.get_shitpost_prob(): 
+                    p.is_tupak = True
             
             if is_legendary_trigger:
                 p.quality = 1.0
@@ -126,6 +203,11 @@ def process_post_creation(u, ap, now):
                 p.quality = random.uniform(q_range[0], q_range[1])
             elif p.is_tupak:
                 p.quality = random.uniform(0.0, 0.15)
+            
+            # ФИНАЛЬНАЯ ПРОВЕРКА: Пустой пост не должен попасть в оперативную память и БД
+            if not (p.text and p.text.strip()) and not p.media_url:
+                log_d(f"WARNING: Пост {p.id} от {u.username} оказался пустым (нет текста и медиа), отменяем публикацию.")
+                return ap
             
             GlobalState.all_posts.append(p)
             u.participated_posts.add(p.id)
@@ -135,5 +217,6 @@ def process_post_creation(u, ap, now):
             log_d(f"\033[91m{prefix}: {u.username} опубликовал пост (id:{p.id})\033[0m")
             ap -= 10
             return ap
+            
     return ap
 # --- END OF FILE lepra_sim_logic_post_creation.py ---
