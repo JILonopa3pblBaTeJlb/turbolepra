@@ -156,7 +156,20 @@ class TextProcessor:
             if response.status_code == 200:
                 result = response.json().get('response', '')
                 if result:
-                    clean_text = self._normalize_text(result.replace('"', '').replace('*', ''))
+                    # Очистка кавычек и звездочек
+                    cleaned = result.replace('"', '').replace('*', '')
+                    
+                    # Если текст начинается с « — удаляем этот символ (и только его)
+                    if cleaned.startswith('«'):
+                        cleaned = cleaned[1:]
+                        
+                    # Если текст заканчивается на ». или » — удаляем их
+                    if cleaned.endswith('».'):
+                        cleaned = cleaned[:-2]
+                    elif cleaned.endswith('»'):
+                        cleaned = cleaned[:-1]
+
+                    clean_text = self._normalize_text(cleaned)
                     return self._process_image_placeholders(clean_text)
         except Exception as e:
             print(f"[OLLAMA ERROR] {e}")
