@@ -230,16 +230,19 @@ class BotUser:
     def __init__(self, username=None, special_role=None, creator_id=None, gender=None):
         self.id = GlobalState.user_id_counter
         GlobalState.user_id_counter += 1
+        self.creator_id = creator_id  # <--- СОХРАНЯЕМ ИНФОРМАЦИЮ О ТОМ, КТО ПРИГЛАСИЛ
         
         # ЛОГИКА ЭНЗЕ с корректным приоритетом переданных аргументов конструктора
         if self.id == 6579:
+            self.special_role = "королева"
             self.username = username if username else "enze"
-            self.special_role = special_role if special_role else "королева"
-            self.gender = gender if gender else "female"
+            self.gender = "female"
         else:
-            self.username = username if username else "temp"
             self.special_role = special_role
-            self.gender = gender if gender else ("female" if random.random() < 0.2 else "male")
+        
+        self.gender = gender if gender else ("female" if random.random() < 0.2 else "male")
+        self.username = username if username else "temp"
+        self.special_role = special_role
         
         # Базовая инициализация с учетом пола и креативности
         if self.gender == "female":
@@ -275,8 +278,8 @@ class BotUser:
         elif r < 0.88: self.skill_type = "static"
         else: self.skill_type = "random"
         
-        if creator_id and creator_id in GlobalState.users_map:
-            creator = GlobalState.users_map[creator_id]
+        if self.creator_id and self.creator_id in GlobalState.users_map:
+            creator = GlobalState.users_map[self.creator_id]
             if random.random() < 0.8:
                 self.pol_x = max(0, min(1, creator.pol_x + random.uniform(-0.05, 0.05)))
                 self.pol_y = max(0, min(1, creator.pol_y + random.uniform(-0.05, 0.05)))
