@@ -175,11 +175,12 @@ def get_post_summary_html(p_id, author_id, username, post_type, rating, comments
     '''
 
 def get_comment_html(c_id, author_id, author_name, text, rating, timestamp):
+    formatted_text = text.replace('\n', '<br>') if text else ""
     return f'''
     <div class="c_i" id="c{c_id}">
     <br>
         <div class="b-c_o" style="border-color: rgb(160, 89, 0);"></div>
-        <div class="c_body">{text}</div>
+        <div class="c_body">{formatted_text}</div>
         <div class="c_footer" style="font-size: smaller; color: rgb(120, 120, 120);">
             <div class="ddi" style="display: inline-block;">
                 <span class="c_wrote">Написал</span> 
