@@ -231,19 +231,17 @@ class BotUser:
         self.id = GlobalState.user_id_counter
         GlobalState.user_id_counter += 1
         
-        # ЛОГИКА ЭНЗЕ
+        # ЛОГИКА ЭНЗЕ с корректным приоритетом переданных аргументов конструктора
         if self.id == 6579:
-            self.special_role = "королева"
-            self.username = "enze"
-            self.gender = "female"
+            self.username = username if username else "enze"
+            self.special_role = special_role if special_role else "королева"
+            self.gender = gender if gender else "female"
         else:
+            self.username = username if username else "temp"
             self.special_role = special_role
+            self.gender = gender if gender else ("female" if random.random() < 0.2 else "male")
         
-        self.gender = gender if gender else ("female" if random.random() < 0.2 else "male")
-        self.username = username if username else "temp"
-        self.special_role = special_role
-        
-        # Базовая инициализация (как была в последнем блоке)
+        # Базовая инициализация с учетом пола и креативности
         if self.gender == "female":
             self.interests = set(random.sample(INTERESTS_POOL, k=random.randint(3, 6)))
             self.interests.update(random.sample(FEMALE_INTERESTS, 2))
@@ -299,7 +297,6 @@ class BotUser:
             rest_of_world = list(range(-12, 0)) + list(range(10, 15))
             self.tz_offset = random.choice(rest_of_world)
             
-            
         self.invites = 3
         self.is_pg = False
         self.is_banned = False
@@ -318,8 +315,6 @@ class BotUser:
 
     @property
     def rating(self): return GlobalState.rating_cache[self.id]
-
-    
 
     def get_vote_weight(self):
         k = self.karma
