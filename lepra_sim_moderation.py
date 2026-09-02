@@ -56,7 +56,7 @@ def do_pg_moderation(common_glagne):
                     
                     if angry_voter_ids:
                         for v_id in angry_voter_ids:
-                            update_karma(v_id, pg_user.id, -5)
+                            update_karma(v_id, pg_user.id, -4)
                             log_d(f"PG_MOD: {GlobalState.users_map[v_id].username} негодует из-за удаления поста и минусует ПГ")
             else:
                 update_karma(author.id, pg_user.id, -2)

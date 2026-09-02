@@ -247,10 +247,10 @@ class BotUser:
         if self.gender == "female":
             self.interests = set(random.sample(INTERESTS_POOL, k=random.randint(3, 6)))
             self.interests.update(random.sample(FEMALE_INTERESTS, 2))
-            self.creativity = random.uniform(0.0, 0.075)
+            self.creativity = random.uniform(0.0, 0.015)
         else:
             self.interests = set(random.sample(INTERESTS_POOL, k=random.randint(3, 6)))
-            self.creativity = random.uniform(0.0, 0.15)
+            self.creativity = random.uniform(0.0, 0.75)
         
         self.inbox_ids: List[int] = []
         self.is_miner = random.random() < 0.3
